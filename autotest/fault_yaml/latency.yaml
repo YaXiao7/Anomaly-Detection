@@ -1,0 +1,30 @@
+apiVersion: chaos-mesh.org/v1alpha1
+kind: NetworkChaos
+metadata:
+  name: latency-{re}
+  namespace: trainticket
+spec:
+  action: delay
+  mode: one
+  duration: 10m
+  selector:
+    pods:
+      trainticket:
+        - {re-preserve-other}
+        - {re-preserve}
+        - {re-user}
+        - {re-food}
+        - {re-ticketinfo}
+        - {re-security}
+        - {re-contacts}
+        - {re-travel}
+        - {re-travel2}
+        - {re-station}
+        - {re-seat}
+        - {re-order-other}
+        - {re-order}
+        - {re-assurance}
+  delay:
+    latency: '200ms'
+    correlation: '50'
+    jitter: '20ms'
